@@ -3,8 +3,8 @@
 # Variables for Folder Paths
 rootFolderPathh="/home/nponcian" # "/var/fpwork/nponcian/TOOLS"
 mainFolderPathh="${rootFolderPathh}/Scripts/CodingGuidelines"
-nokiaCodingGuidelinesFilePathh="${mainFolderPathh}/CodingGuidelines_Nokia.txt"
-coreCodingGuidelinesFilePathh="${mainFolderPathh}/CodingGuidelines_Core.txt"
+nokiaCodingGuidelinesFilePathh="${mainFolderPathh}/Guidelines/CodingGuidelines_Nokia.txt"
+coreCodingGuidelinesFilePathh="${mainFolderPathh}/Guidelines/CodingGuidelines_Core.txt"
 configFolderPathh="${mainFolderPathh}/.ConfigFiles"
 configFilePathh="${configFolderPathh}/.config_$(whoami)"
 
@@ -17,6 +17,75 @@ defaultItemsPerDayInNokiaGuide=5
 firstLineToReadInCoreGuide=1
 lastLineToReadInCoreGuide=14635
 defaultItemsPerDayInCoreGuide=1
+
+func_showhelp()
+{
+    echo
+    echo "This script displays a set of Nokia Coding Guidelines for the day."
+    echo "For emphasis, only the same set of guidelines would be displayed within the course of the day."
+    echo "But there are flag-settings to read more guidelines within a day."
+    echo
+    echo "USAGE:"
+    echo
+    echo "1. To display Nokia Coding Guidelines upon login to shell"
+    echo "    Step 1: <vim ~/.bashrc>"
+    echo "    Step 2: Add line <source /home/nponcian/Scripts/CodingGuidelines/showcppguide>"
+    echo
+    echo "2. To display Nokia Coding Guidelines at any point in time while logged-in as non-root user"
+    echo "    Option 1: Read the file by the command <source>"
+    echo "                    <source /home/nponcian/Scripts/CodingGuidelines/showcppguide>"
+    echo "                    or"
+    echo "                    <. /home/nponcian/Scripts/CodingGuidelines/showcppguide>"
+    echo "              Note: Once you have already sourced it, then it can be simply invoked by <showcppguide>"
+    echo "    Option 2: Execute the file"
+    echo "                    </home/nponcian/Scripts/CodingGuidelines/showcppguide>"
+    echo "                    or"
+    echo "                    <bash /home/nponcian/Scripts/CodingGuidelines/showcppguide>"
+    echo
+    echo "FLAGS SETTINGS:"
+    echo
+    echo "NOTE:"
+    echo "    Only input 1 flag at a time"
+    echo "    This flags wouldn't display the guidelines but rather just modify the target settings"
+    echo "    You have the option to either source or execute the script, but source would be the easier option"
+    echo
+    echo "1. --help"
+    echo "        You are already here! Congratulations for making it here with no reference ^_^"
+    echo "        Usage:"
+    echo "            Option 1: See it by sourcing file"
+    echo "                      Step 1: <source /home/nponcian/Scripts/CodingGuidelines/showcppguide>"
+    echo "                      Step 2: <showcppguide --help>"
+    echo "                      And as with the rest of commands, you could do:"
+    echo "                            <showcppguide --adjustnokiaguidelinesperday 10>"
+    echo "            Option 2: See it by running executable"
+    echo "                      </home/nponcian/Scripts/CodingGuidelines/showcppguide --help>"
+    echo "                      And as with the rest of commands, you could do:"
+    echo "                            <./showcppguide --adjustnokiaguidelinesperday 10>"
+    echo
+    echo "2. --adjustnokiaguidelinesperday X"
+    echo "        Adjust the number of Nokia Coding Guidelines displayed per day to value X"
+    echo
+    echo "3. --setdisplaynextsetofnokiaguidelines"
+    echo "        Modify settings to display the next set of Nokia Coding Guidelines"
+    echo
+    echo "4. --showcppcoreguide or --showcppcoreguide X"
+    echo "        Display 1 item from the C++ Core Guidelines"
+    echo "        Variant with argument X would start and show 1 guideline from line X"
+    echo "            Range of allowed values: "${firstLineToReadInCoreGuide}" to "${lastLineToReadInCoreGuide}
+    echo "        Advance your career NOW and learn more of this!"
+    echo "        Each invoke would display a different lesson!"
+    echo
+    echo "5. --showallnokia"
+    echo "        Display all Nokia Coding Guidelines on another screen"
+    echo
+    echo "6. --showallcore"
+    echo "        Display all C++ Core Guidelines on another screen"
+    echo
+    echo "7. --reset"
+    echo "        Reset all your settings to default."
+    echo "        This will also restart the reading of the guidelines."
+    echo
+}
 
 func_showcppnokiaguide()
 {
@@ -146,7 +215,7 @@ func_showcppcoreguide()
     done
 }
 
-# the one that is directly called when this file is already sourced and then called by <showcppguide>
+# The one that is directly called when this file is already sourced and then called by <showcppguide>
 showcppguide()
 {
     if [ $# -eq 0 ]; then
@@ -155,70 +224,7 @@ showcppguide()
     fi
 
     if [ "${1}" == "--help" ]; then
-        echo "This script displays a set of Nokia Coding Guidelines for the day."
-        echo "For emphasis, only the same set of guidelines would be displayed within the course of the day."
-        echo "But there are flag-settings to read more guidelines within a day."
-        echo
-        echo "USAGE:"
-        echo
-        echo "1. To display Nokia Coding Guidelines upon login to shell"
-        echo "    Step 1: <vim ~/.bashrc>"
-        echo "    Step 2: Add line <source /home/nponcian/Scripts/CodingGuidelines/showcppguide>"
-        echo
-        echo "2. To display Nokia Coding Guidelines at any point in time while logged-in as non-root user"
-        echo "    Option 1: Read the file by the command <source>"
-        echo "                    <source /home/nponcian/Scripts/CodingGuidelines/showcppguide>"
-        echo "                    or"
-        echo "                    <. /home/nponcian/Scripts/CodingGuidelines/showcppguide>"
-        echo "              Note: Once you have already sourced it, then it can be simply invoked by <showcppguide>"
-        echo "    Option 2: Execute the file"
-        echo "                    </home/nponcian/Scripts/CodingGuidelines/showcppguide>"
-        echo "                    or"
-        echo "                    <bash /home/nponcian/Scripts/CodingGuidelines/showcppguide>"
-        echo
-        echo "FLAGS SETTINGS:"
-        echo
-        echo "NOTE:"
-        echo "    Only input 1 flag at a time"
-        echo "    This flags wouldn't display the guidelines but rather just modify the target settings"
-        echo "    You have the option to either source or execute the script, but source would be the easier option"
-        echo
-        echo "1. --help"
-        echo "        You are already here! Congratulations for making it here with no reference ^_^"
-        echo "        Usage:"
-        echo "            Option 1: See it by sourcing file"
-        echo "                      Step 1: <source /home/nponcian/Scripts/CodingGuidelines/showcppguide>"
-        echo "                      Step 2: <showcppguide --help>"
-        echo "                      And as with the rest of commands, you could do:"
-        echo "                            <showcppguide --adjustnokiaguidelinesperday 10>"
-        echo "            Option 2: See it by running executable"
-        echo "                      </home/nponcian/Scripts/CodingGuidelines/showcppguide --help>"
-        echo "                      And as with the rest of commands, you could do:"
-        echo "                            <./showcppguide --adjustnokiaguidelinesperday 10>"
-        echo
-        echo "2. --adjustnokiaguidelinesperday X"
-        echo "        Adjust the number of Nokia Coding Guidelines displayed per day to value X"
-        echo
-        echo "3. --setdisplaynextsetofnokiaguidelines"
-        echo "        Modify settings to display the next set of Nokia Coding Guidelines"
-        echo
-        echo "4. --showcppcoreguide or --showcppcoreguide X"
-        echo "        Display 1 item from the C++ Core Guidelines"
-        echo "        Variant with argument X would start and show 1 guideline from line X"
-        echo "            Range of allowed values: "${firstLineToReadInCoreGuide}" to "${lastLineToReadInCoreGuide}
-        echo "        Advance your career NOW and learn more of this!"
-        echo "        Each invoke would display a different lesson!"
-        echo
-        echo "5. --showallnokia"
-        echo "        Display all Nokia Coding Guidelines on another screen"
-        echo
-        echo "6. --showallcore"
-        echo "        Display all C++ Core Guidelines on another screen"
-        echo
-        echo "7. --reset"
-        echo "        Reset all your settings to default."
-        echo "        This will also restart the reading of the guidelines."
-        echo
+        func_showhelp
 
     elif [[ "${1}" == "--adjustnokiaguidelinesperday" ||
             "${1}" == "--setdisplaynextsetofnokiaguidelines" ]]; then
@@ -240,9 +246,19 @@ showcppguide()
             echo "coreGuide_NextLineToProcess=${firstLineToReadInCoreGuide}" >> ${configFilePathh}
 
         else
-            if [  "${1}" == "--adjustnokiaguidelinesperday" ]; then
+            if [ "${1}" == "--adjustnokiaguidelinesperday" ]; then
                 sed -i 's/nokiaGuide_ItemsPerDay=.*/nokiaGuide_ItemsPerDay='${2}'/' ${configFilePathh}
             else
+                # The entered command --setdisplaynextsetofnokiaguidelines shall move on and display
+                # the next set of Nokia Coding Guidelines. To do this, the solution below is to take
+                # advantage of how this script detects if it is the same day to not display the next
+                # set of Nokia Coding Guidelines, which is by checking if the current date of execution
+                # is still equal to the date of last execution (via variable nokiaGuide_DateOfLastRead)
+                # which is written to the .config_name file. Thus, by simply changing this text by
+                # adding "_modified" would then make it look like upon comparison to current date
+                # that the date has changed even if it actually did not. Comparison that will happen
+                # will be for example <06-25-2019 != 06-25-2019_modified> which will then result to
+                # moving on to the next set of Nokia Coding Guidelines items
                 source ${configFilePathh}
                 sed -i 's/nokiaGuide_DateOfLastRead=.*/nokiaGuide_DateOfLastRead='${nokiaGuide_DateOfLastRead}'_modified/' ${configFilePathh}
             fi
@@ -251,18 +267,19 @@ showcppguide()
     elif [ "${1}" == "--showcppcoreguide" ]; then
         func_showcppcoreguide ${@}
 
-    elif [ "${1}" == "--reset" ]; then
-        rm -f ${configFilePathh}
-
     elif [ "${1}" == "--showallnokia" ]; then
         cat ${nokiaCodingGuidelinesFilePathh} | less
 
     elif [ "${1}" == "--showallcore" ]; then
         cat ${coreCodingGuidelinesFilePathh} | less
+
+    elif [ "${1}" == "--reset" ]; then
+        rm -f ${configFilePathh}
+
     fi
 }
 
-# the one that is directly called when this file is
+# The one that is directly called when this file is either
 # 1. sourced <source showcppguide> or
 # 2. executed <./showcppguide> or
 # 3. is added to $PATH and called <showcppguide>
