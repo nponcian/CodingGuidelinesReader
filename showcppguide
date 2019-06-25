@@ -1,10 +1,18 @@
 #!/bin/bash
 
 # Variables for Folder Paths
-rootFolderPathh="/home/nponcian/Documents" # "/var/fpwork/nponcian/TOOLS"
-mainFolderPathh="${rootFolderPathh}/Scripts/CodingGuidelinesReader"
+# These directories rootFolderPathh and mainFolderPathh with specific defined path should be used when
+# script is cloned by a user on a shared common device where other users can use it without the need
+# of cloning on their own. The mainFolderPathh should contain the CodingGuidelinesReader Git repository.
+# # rootFolderPathh="/home/nponcian/Documents" # "/var/fpwork/nponcian/TOOLS"
+# # mainFolderPathh="${rootFolderPathh}/Scripts/CodingGuidelinesReader"
+# This mainFolderPathh with no specific defined path (just depends on pwd) should be used when script
+# is only intended to be used by the user who cloned it. The mainFolderPathh should contain the
+# CodingGuidelinesReader Git repository and user should change directory to it before using this script.
+mainFolderPathh=$(pwd)
 nokiaCodingGuidelinesFilePathh="${mainFolderPathh}/Guidelines/CodingGuidelines_Nokia.txt"
 coreCodingGuidelinesFilePathh="${mainFolderPathh}/Guidelines/CodingGuidelines_Core.txt"
+# This directory configFolderPathh should have RWX rights for all if script is intended to be run on a shared common device
 configFolderPathh="${mainFolderPathh}/ConfigFiles"
 configFilePathh="${configFolderPathh}/config_$(whoami)"
 
@@ -218,6 +226,8 @@ func_showcppcoreguide()
 # The one that is directly called when this file is already sourced and then called by <showcppguide>
 showcppguide()
 {
+    echo "Currently operating on "${mainFolderPathh}
+    echo "Remember to change directory (cd) to cloned git repository folder for CodingGuidelinesReader before execution!"
     mkdir -p ${configFolderPathh}
 
     if [ $# -eq 0 ]; then
