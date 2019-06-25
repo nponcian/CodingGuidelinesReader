@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # Variables for Folder Paths
-rootFolderPathh="/home/nponcian" # "/var/fpwork/nponcian/TOOLS"
-mainFolderPathh="${rootFolderPathh}/Scripts/CodingGuidelines"
+rootFolderPathh="/home/nponcian/Documents" # "/var/fpwork/nponcian/TOOLS"
+mainFolderPathh="${rootFolderPathh}/Scripts/CodingGuidelinesReader"
 nokiaCodingGuidelinesFilePathh="${mainFolderPathh}/Guidelines/CodingGuidelines_Nokia.txt"
 coreCodingGuidelinesFilePathh="${mainFolderPathh}/Guidelines/CodingGuidelines_Core.txt"
-configFolderPathh="${mainFolderPathh}/.ConfigFiles"
-configFilePathh="${configFolderPathh}/.config_$(whoami)"
+configFolderPathh="${mainFolderPathh}/ConfigFiles"
+configFilePathh="${configFolderPathh}/config_$(whoami)"
 
 # Variables for Nokia Coding Guidelines
 firstLineToReadInNokiaGuide=1
@@ -29,18 +29,18 @@ func_showhelp()
     echo
     echo "1. To display Nokia Coding Guidelines upon login to shell"
     echo "    Step 1: <vim ~/.bashrc>"
-    echo "    Step 2: Add line <source /home/nponcian/Scripts/CodingGuidelines/showcppguide>"
+    echo "    Step 2: Add line <source "${mainFolderPathh}"/showcppguide>"
     echo
     echo "2. To display Nokia Coding Guidelines at any point in time while logged-in as non-root user"
     echo "    Option 1: Read the file by the command <source>"
-    echo "                    <source /home/nponcian/Scripts/CodingGuidelines/showcppguide>"
+    echo "                    <source "${mainFolderPathh}"/showcppguide>"
     echo "                    or"
-    echo "                    <. /home/nponcian/Scripts/CodingGuidelines/showcppguide>"
+    echo "                    <. "${mainFolderPathh}"/showcppguide>"
     echo "              Note: Once you have already sourced it, then it can be simply invoked by <showcppguide>"
     echo "    Option 2: Execute the file"
-    echo "                    </home/nponcian/Scripts/CodingGuidelines/showcppguide>"
+    echo "                    <"${mainFolderPathh}"/showcppguide>"
     echo "                    or"
-    echo "                    <bash /home/nponcian/Scripts/CodingGuidelines/showcppguide>"
+    echo "                    <bash "${mainFolderPathh}"/showcppguide>"
     echo
     echo "FLAGS SETTINGS:"
     echo
@@ -53,12 +53,12 @@ func_showhelp()
     echo "        You are already here! Congratulations for making it here with no reference ^_^"
     echo "        Usage:"
     echo "            Option 1: See it by sourcing file"
-    echo "                      Step 1: <source /home/nponcian/Scripts/CodingGuidelines/showcppguide>"
+    echo "                      Step 1: <source "${mainFolderPathh}"/showcppguide>"
     echo "                      Step 2: <showcppguide --help>"
     echo "                      And as with the rest of commands, you could do:"
     echo "                            <showcppguide --adjustnokiaguidelinesperday 10>"
     echo "            Option 2: See it by running executable"
-    echo "                      </home/nponcian/Scripts/CodingGuidelines/showcppguide --help>"
+    echo "                      <"${mainFolderPathh}"/showcppguide --help>"
     echo "                      And as with the rest of commands, you could do:"
     echo "                            <./showcppguide --adjustnokiaguidelinesperday 10>"
     echo
@@ -152,11 +152,11 @@ func_showcppnokiaguide()
     echo "Do you want to see C++ Core Guidelines? Advance your career NOW and learn more of this!"
     echo "Each invoke would display a different lesson."
     echo "    Option 1: See it by sourcing file"
-    echo "              Step 1: <source /home/nponcian/Scripts/CodingGuidelines/showcppguide>"
+    echo "              Step 1: <source "${mainFolderPathh}"/showcppguide>"
     echo "                      Skip this step if already done on the current shell instance"
     echo "              Step 2: <showcppguide --showcppcoreguide>"
     echo "    Option 2: See it by running executable"
-    echo "              </home/nponcian/Scripts/CodingGuidelines/showcppguide --showcppcoreguide>"
+    echo "              <"${mainFolderPathh}"/showcppguide --showcppcoreguide>"
     echo
 }
 
@@ -218,6 +218,8 @@ func_showcppcoreguide()
 # The one that is directly called when this file is already sourced and then called by <showcppguide>
 showcppguide()
 {
+    mkdir -p ${configFolderPathh}
+
     if [ $# -eq 0 ]; then
         func_showcppnokiaguide
         return
