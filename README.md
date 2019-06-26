@@ -21,7 +21,7 @@ Step 2:
 1. If Git is available
     1. <git clone https://github.com/nponcian/CodingGuidelinesReader.git>
 2. Otherwise
-    1. Download ZIP from https://github.com/nponcian/CodingGuidelinesReader.git
+    1. Download and extract the ZIP from https://github.com/nponcian/CodingGuidelinesReader.git
 
 Step 3:
 <chmod a+rwx ../Path/To/CodingGuidelinesReader/ConfigFiles>
