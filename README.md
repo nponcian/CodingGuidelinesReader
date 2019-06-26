@@ -1,7 +1,7 @@
 CodingGuidelinesReader
 
 Purpose\
-Since not everyone would make an effort on an everyday basis to continuously read and refresh knowledge about C++ coding guidelines, this particular shell script repository will aid and help to solve that problem. As long as users login everyday to their respective GNU/Linux machines be it at work or at home, this script can be setup to automatically display the C++ coding guidelines without any explicit request from the user (more information about this in Step 4::Item 3.a.2. below). And the good thing about it is that the user will not be overwhelmed by hundreds to thousands of lines of guidelines which reading all at once might only lead to forgetting it the next day, because this script controls how many guidelines will show up for the day. Treat it as something like "Your C++ coding guideline tips for the day".
+Since not everyone would make an effort on an everyday basis to continuously read and refresh knowledge about C++ coding guidelines, this particular shell script repository will aid and help to solve that problem. As long as users login everyday to their respective GNU/Linux machines be it at work or at home, this script can be setup to automatically display the C++ coding guidelines without any explicit request from the user (more information about this in Step 4::Item 3.1.2. below). And the good thing about it is that the user will not be overwhelmed by hundreds to thousands of lines of guidelines which reading all at once might only lead to forgetting it the next day, because this script controls how many guidelines will show up for the day. Treat it as something like "Your C++ coding guideline tips for the day".
 
 Requirements
 

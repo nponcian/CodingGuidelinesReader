@@ -92,6 +92,7 @@ func_showhelp()
     echo "7. --reset"
     echo "        Reset all your settings to default."
     echo "        This will also restart the reading of the guidelines."
+    echo "        This would only affect the user who invoked it, other users are unaffected."
     echo
 }
 
@@ -273,6 +274,8 @@ showcppguide()
                 sed -i 's/nokiaGuide_DateOfLastRead=.*/nokiaGuide_DateOfLastRead='${nokiaGuide_DateOfLastRead}'_modified/' ${configFilePathh}
             fi
         fi
+
+        func_showcppnokiaguide
 
     elif [ "${1}" == "--showcppcoreguide" ]; then
         func_showcppcoreguide ${@}
