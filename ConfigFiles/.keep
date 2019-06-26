@@ -1,2 +1,3 @@
 Dummy file to add this empty directory ConfigFiles/ to this Git repository
-Take note that this directory ConfigFiles/ should have RWX rights for all if script is intended to be run on a shared common device
+
+If script is intended to be run on a shared common device, then this directory ConfigFiles/ should have RWX rights for all

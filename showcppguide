@@ -1,18 +1,19 @@
 #!/bin/bash
 
 # Variables for Folder Paths
-# These directories rootFolderPathh and mainFolderPathh with specific defined path should be used when
-# script is cloned by a user on a shared common device where other users can use it without the need
-# of cloning on their own. The mainFolderPathh should contain the CodingGuidelinesReader Git repository.
-# # rootFolderPathh="/home/nponcian/Documents" # "/var/fpwork/nponcian/TOOLS"
-# # mainFolderPathh="${rootFolderPathh}/Scripts/CodingGuidelinesReader"
-# This mainFolderPathh with no specific defined path (just depends on directory of this script)
-# should be used when script is only intended to be used by the user who cloned it. The mainFolderPathh
-# should contain the CodingGuidelinesReader Git repository.
-mainFolderPathh=$(dirname "$0")
+# The mainFolderPathh should contain the CodingGuidelinesReader Git repository.
+# When using the <source> command, make sure to write the complete absolute path of the CodingGuidelinesReader
+# Git repository so that this script can be executed not just in the directory to where <source>
+# command was issued but to wherever directory you are currently in. For example <source /Absolute/Path/To/script>
+# then you can.be able to call <script> anywhere you are in the file directories.
+# On the other hand if not using the <source> command, there are no limitations when issuing the script
+# as a binary <./> or <../Relative/Path/To/script> or </Absolute/Path/To/script> or directly through
+# bash <bash script> or <bash ../Relative/Path/To/script> or <bash /Absolute/Path/To/script>
+mainFolderPathh=$(dirname "${BASH_SOURCE}")
 nokiaCodingGuidelinesFilePathh="${mainFolderPathh}/Guidelines/CodingGuidelines_Nokia.txt"
 coreCodingGuidelinesFilePathh="${mainFolderPathh}/Guidelines/CodingGuidelines_Core.txt"
-# This directory configFolderPathh should have RWX rights for all if script is intended to be run on a shared common device
+# If script is intended to be run on a shared common device, the configFolderPathh directory should
+# have RWX rights for all
 configFolderPathh="${mainFolderPathh}/ConfigFiles"
 configFilePathh="${configFolderPathh}/config_$(whoami)"
 
@@ -29,59 +30,64 @@ defaultItemsPerDayInCoreGuide=1
 func_showhelp()
 {
     echo
-    echo "This script displays a set of Nokia Coding Guidelines for the day."
+    echo "This script by default displays a set of Nokia Coding Guidelines for the day."
     echo "For emphasis, only the same set of guidelines would be displayed within the course of the day."
-    echo "But there are flag-settings to read more guidelines within a day."
+    echo "There are flags to change this default settings if you wish to."
+    echo
+    echo "This script can also display C++ Core Guidelines if issued the corresponding flags for it."
     echo
     echo "USAGE:"
     echo
-    echo "1. To display Nokia Coding Guidelines upon login to shell"
+    echo "1. To display Coding Guidelines upon login to shell"
     echo "    Step 1: <vim ~/.bashrc>"
-    echo "    Step 2: Add line <source "${mainFolderPathh}"/showcppguide>"
+    echo "    Step 2: Add line <source /Absolute/Path/To/CodingGuidelinesReader/showcppguide>"
+    echo "    Note:"
+    echo "        The complete absolute path must be sourced so that it can be invoked later to wherever directory you are"
+    echo "        This is a one-time step. Once done, you don't have to repeat it anymore even upon relogin"
+    echo "        If the script has already been sourced, then it can be simply invoked by <showcppguide>"
     echo
-    echo "2. To display Nokia Coding Guidelines at any point in time while logged-in as non-root user"
-    echo "    Option 1: Read the file by the command <source>"
-    echo "                    <source "${mainFolderPathh}"/showcppguide>"
+    echo "2. To display Coding Guidelines at any point in time"
+    echo "    Option 1: Source the file (should be by its complete absolute path)"
+    echo "                    <source /Absolute/Path/To/CodingGuidelinesReader/showcppguide>"
     echo "                    or"
-    echo "                    <. "${mainFolderPathh}"/showcppguide>"
-    echo "              Note: Once you have already sourced it, then it can be simply invoked by <showcppguide>"
-    echo "    Option 2: Execute the file"
+    echo "                    <source /Absolute/Path/To/CodingGuidelinesReader/showcppguide --flag>"
+    echo "                    or"
+    echo "                    <. /Absolute/Path/To/CodingGuidelinesReader/showcppguide>"
+    echo "                    or"
+    echo "                    <. /Absolute/Path/To/CodingGuidelinesReader/showcppguide --flag>"
+    echo "    Option 2: Call the function directly (only if the script has already been sourced)"
+    echo "                    <showcppguide>"
+    echo "                    or"
+    echo "                    <showcppguide --flag>"
+    echo "    Option 3: Execute the file (could either be by absolute or relative path)"
     echo "                    <"${mainFolderPathh}"/showcppguide>"
     echo "                    or"
+    echo "                    <"${mainFolderPathh}"/showcppguide --flag>"
+    echo "                    or"
     echo "                    <bash "${mainFolderPathh}"/showcppguide>"
+    echo "                    or"
+    echo "                    <bash "${mainFolderPathh}"/showcppguide --flag>"
     echo
     echo "FLAGS SETTINGS:"
     echo
-    echo "NOTE:"
-    echo "    Only input 1 flag at a time"
-    echo "    This flags wouldn't display the guidelines but rather just modify the target settings"
-    echo "    You have the option to either source or execute the script, but source would be the easier option"
+    echo "Please input only one flag at a time"
     echo
     echo "1. --help"
-    echo "        You are already here! Congratulations for making it here with no reference ^_^"
-    echo "        Usage:"
-    echo "            Option 1: See it by sourcing file"
-    echo "                      Step 1: <source "${mainFolderPathh}"/showcppguide>"
-    echo "                      Step 2: <showcppguide --help>"
-    echo "                      And as with the rest of commands, you could do:"
-    echo "                            <showcppguide --adjustnokiaguidelinesperday 10>"
-    echo "            Option 2: See it by running executable"
-    echo "                      <"${mainFolderPathh}"/showcppguide --help>"
-    echo "                      And as with the rest of commands, you could do:"
-    echo "                            <./showcppguide --adjustnokiaguidelinesperday 10>"
+    echo "        At your service when you need help!"
     echo
     echo "2. --adjustnokiaguidelinesperday X"
     echo "        Adjust the number of Nokia Coding Guidelines displayed per day to value X"
+    echo "        For reference, the default setting by the script is 5 per day"
     echo
     echo "3. --setdisplaynextsetofnokiaguidelines"
-    echo "        Modify settings to display the next set of Nokia Coding Guidelines"
+    echo "        Display the next set of Nokia Coding Guidelines"
+    echo "        Use it if you want to move on already from the set of guidelines displayed for the current day"
     echo
     echo "4. --showcppcoreguide or --showcppcoreguide X"
     echo "        Display 1 item from the C++ Core Guidelines"
+    echo "        Each invoke would display a different lesson"
     echo "        Variant with argument X would start and show 1 guideline from line X"
     echo "            Range of allowed values: "${firstLineToReadInCoreGuide}" to "${lastLineToReadInCoreGuide}
-    echo "        Advance your career NOW and learn more of this!"
-    echo "        Each invoke would display a different lesson!"
     echo
     echo "5. --showallnokia"
     echo "        Display all Nokia Coding Guidelines on another screen"
@@ -90,9 +96,9 @@ func_showhelp()
     echo "        Display all C++ Core Guidelines on another screen"
     echo
     echo "7. --reset"
-    echo "        Reset all your settings to default."
-    echo "        This will also restart the reading of the guidelines."
-    echo "        This would only affect the user who invoked it, other users are unaffected."
+    echo "        Reset all your settings to default"
+    echo "        This will also restart the reading of your guidelines"
+    echo "        This would only affect the user who invoked it, other users using the same repository are unaffected"
     echo
 }
 
@@ -131,7 +137,8 @@ func_showcppnokiaguide()
 
         if (( ${lineProcessedInNokiaGuide} < ${nokiaGuide_NextLineToProcess} )); then
             continue
-        elif (( ${lineProcessedInNokiaGuide} > ${lastLineToReadInNokiaGuide} )); then
+        elif (( ${lineProcessedInNokiaGuide} >= ${lastLineToReadInNokiaGuide} )); then
+            echo "${line}"
             lineProcessedInNokiaGuide=${firstLineToReadInNokiaGuide}
             break
         fi
@@ -159,13 +166,8 @@ func_showcppnokiaguide()
     echo
     echo
     echo "Do you want to see C++ Core Guidelines? Advance your career NOW and learn more of this!"
-    echo "Each invoke would display a different lesson."
-    echo "    Option 1: See it by sourcing file"
-    echo "              Step 1: <source "${mainFolderPathh}"/showcppguide>"
-    echo "                      Skip this step if already done on the current shell instance"
-    echo "              Step 2: <showcppguide --showcppcoreguide>"
-    echo "    Option 2: See it by running executable"
-    echo "              <"${mainFolderPathh}"/showcppguide --showcppcoreguide>"
+    echo "Just execute the script with flag --showcppcoreguide"
+    echo "For more information, run help <"${mainFolderPathh}"/showcppguide --help>"
     echo
 }
 
@@ -227,20 +229,20 @@ func_showcppcoreguide()
 # The one that is directly called when this file is already sourced and then called by <showcppguide>
 showcppguide()
 {
-    mkdir -p ${configFolderPathh}
-
     if [ $# -eq 0 ]; then
+        # This is the default behavior when invoking without any flags, to display the Nokia guidelines
         func_showcppnokiaguide
-        return
-    fi
 
-    if [ "${1}" == "--help" ]; then
+    elif [ "${1}" == "--help" ]; then
         func_showhelp
 
     elif [[ "${1}" == "--adjustnokiaguidelinesperday" ||
             "${1}" == "--setdisplaynextsetofnokiaguidelines" ]]; then
 
         if [ ! -e ${configFilePathh} ]; then
+            # If there is no existing config file for user, create it anew and adjustnokiaguidelinesperday
+            # if needed. The flag setdisplaynextsetofnokiaguidelines is of no sense here because there
+            # is no existing config file to be used as basis for moving to the next set of guidelines.
             local currentDatee=$(date +'%m-%d-%Y')
 
             touch ${configFilePathh}
@@ -257,9 +259,10 @@ showcppguide()
             echo "coreGuide_NextLineToProcess=${firstLineToReadInCoreGuide}" >> ${configFilePathh}
 
         else
+            # If there is an existing config file, configure the target setting to be modified
             if [ "${1}" == "--adjustnokiaguidelinesperday" ]; then
                 sed -i 's/nokiaGuide_ItemsPerDay=.*/nokiaGuide_ItemsPerDay='${2}'/' ${configFilePathh}
-            else
+            elif [ "${1}" == "--setdisplaynextsetofnokiaguidelines" ]; then
                 # The entered command --setdisplaynextsetofnokiaguidelines shall move on and display
                 # the next set of Nokia Coding Guidelines. To do this, the solution below is to take
                 # advantage of how this script detects if it is the same day to not display the next
@@ -272,6 +275,7 @@ showcppguide()
                 # moving on to the next set of Nokia Coding Guidelines items
                 source ${configFilePathh}
                 sed -i 's/nokiaGuide_DateOfLastRead=.*/nokiaGuide_DateOfLastRead='${nokiaGuide_DateOfLastRead}'_modified/' ${configFilePathh}
+
             fi
         fi
 
@@ -293,8 +297,9 @@ showcppguide()
 }
 
 # The one that is directly called when this file is either
-# 1. sourced <source showcppguide> or
-# 2. executed <./showcppguide> or
-# 3. is added to $PATH and called <showcppguide>
+# 1. executed <./showcppguide>
+# 2. bashed <bash showcppguide>
+# 3. sourced <source showcppguide>
+# 3. added to ${PATH} and then is executed or called via <showcppguide>
 showcppguide ${@}
 echo
