@@ -268,14 +268,13 @@ showcppguide()
                 # advantage of how this script detects if it is the same day to not display the next
                 # set of Nokia Coding Guidelines, which is by checking if the current date of execution
                 # is still equal to the date of last execution (via variable nokiaGuide_DateOfLastRead)
-                # which is written to the .config_name file. Thus, by simply changing this text by
+                # which is written to the config_name file. Thus, by simply changing this text by
                 # adding "_modified" would then make it look like upon comparison to current date
                 # that the date has changed even if it actually did not. Comparison that will happen
                 # will be for example <06-25-2019 != 06-25-2019_modified> which will then result to
                 # moving on to the next set of Nokia Coding Guidelines items
                 source ${configFilePathh}
                 sed -i 's/nokiaGuide_DateOfLastRead=.*/nokiaGuide_DateOfLastRead='${nokiaGuide_DateOfLastRead}'_modified/' ${configFilePathh}
-
             fi
         fi
 
