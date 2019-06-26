@@ -5,13 +5,13 @@ Since not everyone would make an effort on an everyday basis to continuously rea
 
 REQUIREMENTS
 1. GNU/Linux environment
-    - Either:\
-        a. Full operating system\
-        b. Virtual machine (as a guest OS)\
-        c. Cygwin\
-        d. etc.
+    1. Either:
+        1. Full operating system
+        2. Virtual machine (as a guest OS)
+        3. Cygwin
+        3. etc.
 2. Git (optional)
-    - To install: sudo apt install git
+    1. To install: sudo apt install git
 
 USAGE\
 Step 1:
