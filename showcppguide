@@ -101,7 +101,7 @@ func_showcppnokiaguide()
     echo "Processing now your daily dose of Nokia Coding Guidelines..."
     echo
 
-    currentDatee=$(date +'%m-%d-%Y') # ${1} # to test this, input date manually by adding argument
+    local currentDatee=$(date +'%m-%d-%Y') # ${1} # to test this, input date manually by adding argument
 
     if [ ! -e ${configFilePathh} ]; then
         # Create a new .config_name file with default starting values for reading the guidelines
@@ -123,7 +123,7 @@ func_showcppnokiaguide()
         fi
     fi
 
-    lineProcessedInNokiaGuide=0
+    local lineProcessedInNokiaGuide=0
 
     while read line; do
         lineProcessedInNokiaGuide=$((${lineProcessedInNokiaGuide}+1))
@@ -174,7 +174,7 @@ func_showcppcoreguide()
     echo "Processing now your daily dose of C++ Core Guidelines..."
     echo
 
-    currentDatee=$(date +'%m-%d-%Y')
+    local currentDatee=$(date +'%m-%d-%Y')
 
     if [ ! -e ${configFilePathh} ]; then
         # Create a new .config_name file with default starting values for reading the guidelines
@@ -194,8 +194,8 @@ func_showcppcoreguide()
         coreGuide_NextLineToProcess=${2}
     fi
 
-    lineProcessedInCoreGuide=${coreGuide_NextLineToProcess}
-    defaultItemsPerDayInCoreGuideCtr=${defaultItemsPerDayInCoreGuide}
+    local lineProcessedInCoreGuide=${coreGuide_NextLineToProcess}
+    local defaultItemsPerDayInCoreGuideCtr=${defaultItemsPerDayInCoreGuide}
 
     tail -n +"${coreGuide_NextLineToProcess}" "${coreCodingGuidelinesFilePathh}" | while read line; do
 
@@ -240,7 +240,7 @@ showcppguide()
             "${1}" == "--setdisplaynextsetofnokiaguidelines" ]]; then
 
         if [ ! -e ${configFilePathh} ]; then
-            currentDatee=$(date +'%m-%d-%Y')
+            local currentDatee=$(date +'%m-%d-%Y')
 
             touch ${configFilePathh}
             echo "nokiaGuide_DateOfLastRead=${currentDatee}" >> ${configFilePathh}
