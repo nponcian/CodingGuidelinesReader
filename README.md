@@ -1,7 +1,7 @@
 CodingGuidelinesReader
 
 ## PURPOSE
-Since not everyone would make an effort on an everyday basis to continuously read and refresh knowledge about C++ coding guidelines, this particular shell script repository will aid and help to solve that problem. As long as users login everyday to their respective GNU/Linux machines be it at work or at home, this script can be setup to automatically display the C++ coding guidelines without any explicit request from the user (more information about this in Step 4::Item 3 below). And the good thing about it is that the user will not be overwhelmed by hundreds to thousands of lines of guidelines which reading all at once might only lead to forgetting it the next day, because this script controls how many guidelines will show up for the day. Treat it as something like "Your C++ coding guideline tips for the day".
+Since not everyone would make an effort on an everyday basis to continuously read and refresh knowledge about C++ coding guidelines, this particular shell script repository will aid and help to solve that problem. As long as users login everyday to their respective GNU/Linux machines be it at work or at home, this script can be setup to automatically display the C++ coding guidelines without any explicit request from the user (more information about this in Usage::4::3 below). And the good thing about it is that the user will not be overwhelmed by hundreds to thousands of lines of guidelines which reading all at once might only lead to forgetting it the next day, because this script controls how many guidelines will show up for the day. Treat it as something like "Your C++ coding guideline tips for the day".
 
 ## REQUIREMENTS
 1. GNU/Linux environment
@@ -45,7 +45,7 @@ chmod a+rwx ConfigFiles/
             2. invoke through absolute path *bash /Path/To/CodingGuidelinesReader/showcppguide*
             3. invoke through relative path with flags *bash ../Path/To/CodingGuidelinesReader/showcppguide --help*
             4. invoke through absolute path with flags *bash /Path/To/CodingGuidelinesReader/showcppguide --help*
-    3. As a shell script that is to be sourced into current shell instance
+    3. As a shell script that is to be sourced into the current shell instance
         1. Source the script either on current working directory or on \~/.bashrc file
             1. Source the script on current working directory
                 1. invoke source or . through absolute path *source /Path/To/CodingGuidelinesReader/showcppguide*
