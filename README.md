@@ -37,14 +37,14 @@ chmod a+rwx ConfigFiles/
         1. Invoke by doing any of the following
             1. invoke through relative path *../Path/To/CodingGuidelinesReader/showcppguide*
             2. invoke through absolute path */Path/To/CodingGuidelinesReader/showcppguide*
-            3. invoke through relative path with flags *../Path/To/CodingGuidelinesReader/showcppguide --help*
-            4. invoke through absolute path with flags */Path/To/CodingGuidelinesReader/showcppguide --help*
+            3. invoke through relative path with flag *../Path/To/CodingGuidelinesReader/showcppguide --help*
+            4. invoke through absolute path with flag */Path/To/CodingGuidelinesReader/showcppguide --help*
     2. As a shell script
         1. Invoke by doing any of the following
             1. invoke through relative path *bash ../Path/To/CodingGuidelinesReader/showcppguide*
             2. invoke through absolute path *bash /Path/To/CodingGuidelinesReader/showcppguide*
-            3. invoke through relative path with flags *bash ../Path/To/CodingGuidelinesReader/showcppguide --help*
-            4. invoke through absolute path with flags *bash /Path/To/CodingGuidelinesReader/showcppguide --help*
+            3. invoke through relative path with flag *bash ../Path/To/CodingGuidelinesReader/showcppguide --help*
+            4. invoke through absolute path with flag *bash /Path/To/CodingGuidelinesReader/showcppguide --help*
     3. As a shell script that is to be sourced into the current shell instance
         1. Source the script either on current working directory or on \~/.bashrc file
             1. Source the script on current working directory
@@ -54,7 +54,7 @@ chmod a+rwx ConfigFiles/
                 2. add line that will source or . through absolute path *source /Path/To/CodingGuidelinesReader/showcppguide*
         2. Invoke by doing any of the following
             1. invoke through the sourced function *showcppguide*
-            2. invoke through the sourced function with flags *showcppguide --help*
+            2. invoke through the sourced function with flag *showcppguide --help*
         3. Some notes
             1. As long as you have sourced the script correctly with the complete absolute path, then the invoke could be done wherever directory you are currently in even if different from the original directory to where source command was issued
             2. The option of adding the source command into \~/.bashrc file would make the script to automatically run and be available upon login to shell without explicit user request
