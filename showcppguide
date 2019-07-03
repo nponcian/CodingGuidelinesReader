@@ -5,10 +5,13 @@
 # When using the <source> command, make sure to write the complete absolute path of the CodingGuidelinesReader
 # Git repository so that this script can be executed not just in the directory to where <source>
 # command was issued but to wherever directory you are currently in. For example <source /Absolute/Path/To/script>
-# then you can.be able to call <script> anywhere you are in the file directories.
+# then you can be able to call <script> anywhere you are in the file directories.
 # On the other hand if not using the <source> command, there are no limitations when issuing the script
-# as a binary <./> or <../Relative/Path/To/script> or </Absolute/Path/To/script> or directly through
+# as a binary <./> be it <../Relative/Path/To/script> or </Absolute/Path/To/script> or directly through
 # bash <bash script> or <bash ../Relative/Path/To/script> or <bash /Absolute/Path/To/script>
+# Use of BASH_SOURCE here is for the script to see the actual path of the repository in cases when the
+# source command is used because sourcing a file results to executing the script at the working directory
+# of the calling shell instance which would always be the current (.) directory.
 mainFolderPathh=$(dirname "${BASH_SOURCE}")
 nokiaCodingGuidelinesFilePathh="${mainFolderPathh}/Guidelines/CodingGuidelines_Nokia.txt"
 coreCodingGuidelinesFilePathh="${mainFolderPathh}/Guidelines/CodingGuidelines_Core.txt"
