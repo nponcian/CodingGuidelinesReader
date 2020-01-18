@@ -12,7 +12,7 @@
 # Use of BASH_SOURCE here is for the script to see the actual path of the repository in cases when the
 # source command is used because sourcing a file results to executing the script at the working directory
 # of the calling shell instance which would always be the current (.) directory.
-mainFolderPathh=$(dirname "${BASH_SOURCE}")
+mainFolderPathh=$(readlink -f "${BASH_SOURCE}" | xargs dirname) # =$(dirname "${BASH_SOURCE}")
 nokiaCodingGuidelinesFilePathh="${mainFolderPathh}/Guidelines/CodingGuidelines_Nokia.txt"
 coreCodingGuidelinesFilePathh="${mainFolderPathh}/Guidelines/CodingGuidelines_Core.txt"
 # If script is intended to be run on a shared common device, the configFolderPathh directory should
