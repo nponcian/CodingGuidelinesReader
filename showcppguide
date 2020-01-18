@@ -1,6 +1,8 @@
 #!/bin/bash
 
 # Variables for Folder Paths
+
+# July 2019 note
 # The mainFolderPathh should contain the CodingGuidelinesReader Git repository.
 # When using the <source> command, make sure to write the complete absolute path of the CodingGuidelinesReader
 # Git repository so that this script can be executed not just in the directory to where <source>
@@ -12,6 +14,12 @@
 # Use of BASH_SOURCE here is for the script to see the actual path of the repository in cases when the
 # source command is used because sourcing a file results to executing the script at the working directory
 # of the calling shell instance which would always be the current (.) directory.
+
+# January 18, 2020 note
+# No more need of writing in the absolute path when sourcing this script, because readlink -f will do
+# the trick! For example <source ../Relative/Path/To/script>. Welcoming you to this new decade of
+# greener pastures :)
+
 mainFolderPathh=$(readlink -f "${BASH_SOURCE}" | xargs dirname) # =$(dirname "${BASH_SOURCE}")
 nokiaCodingGuidelinesFilePathh="${mainFolderPathh}/Guidelines/CodingGuidelines_Nokia.txt"
 coreCodingGuidelinesFilePathh="${mainFolderPathh}/Guidelines/CodingGuidelines_Core.txt"
