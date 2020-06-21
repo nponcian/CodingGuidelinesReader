@@ -1,0 +1,153 @@
+June 21 2020 : 19:14
+
+know the overview purpose and benefits (nothing technically deep yet)
+    ALWAYS start from the customer/user POV and then all the way deeper to the technicalities
+*
+    read guidelines everyday for continuous learning
+
+read requirements, specifications, use cases, acceptance criterias, possible inputs and target output (nothing technically deep yet)
+    if there are multiple different topics covered, then divide/split wherever applicable
+*
+    capabilities
+        will display the same tip would for the same day for every login made to shell
+        can move to the next or previous tip
+        can customize the number of tips to be displayed per day
+        can reset settings to default
+        can show help
+        can show the whole guidelines (via less)
+        instead of tips, can also opt to display a target number of lines per day
+        can start at a target line number
+    input
+        URL or text file
+    output
+        show guidelines upon login to shell
+            can also be upon access to the target API endpoint
+        same guideline would show for the same day
+
+give it a rough estimate
+*
+    8h
+
+define the interface sa user (ex. API endpoint)
+*
+    command line
+        or API endpoint
+
+plan all the data that are needed to be accessed and/or stored
+*
+    access the location of the guidelines
+    store the contents of the guidelines
+    store the user settings and current state
+
+formally write the requirements, specifications, use cases, acceptance criterias, flow diagrams
+*
+    skipped
+
+list the dependencies that are not part of the current task/project
+*
+    none
+
+final verification with team to confirm everyone has the common understanding
+*
+    skipped
+
+design the flow
+    aim simplicity
+    aim future proof
+    aim modularized design
+    aim that each module has a single responsibility
+    aim that the communications between modules are standardized with a well defined interface
+        so if domainA accepts paramA
+        domainA communicates with domainB
+        domainB accepts paramB
+        now, due to some infrastructure changes, paramA changes format, becomes paramA+
+        the idea is that only domainA should be affected
+        domainB should have no changes and should still accept the exact same paramB as if nothing happened
+        actually from the perspective of domainB, it seems like nothing happened, everything is same as before
+    aim less processing time
+    aim less storage
+    document it
+*
+    initialize new document
+        ask the location of the document
+        read the document (supported types are text file or URL)
+            if text file
+                copy it to this local app's directory
+            if URL
+                get the contents from the URL
+                save the response to a text file in the local app's directory
+                    the format could be the whole html and/or the contents only
+            note
+                 prefix the name of the created file with the document ID
+        ask to put separator tags (some form of indicator) that marks each section on the created document
+        ask the value of the separator (could be a regex value)
+            inform that
+                if value is __NONE__
+                    you would configure the number of lines to be displayed per day
+                else
+                    you would configure the number of sections to be displayed per day
+            save it to a text file in the local app's directory
+                this file will be the settings file
+            note
+                 prefix the name of the created file with the document ID
+        ask the items per day to be displayed
+        initialize the fields of the settings file
+            date : init
+            line : 0
+            items_per_day : 1
+            separator : <some user defined value>
+                if value is __NONE__
+                    display x lines per day, where x is the items_per_day
+    display items
+        read settings file
+        if date is not today
+            if separator is __NONE__
+                increment line value to line + items_per_day
+            else
+                find the next x line(s) that contains a separator tag
+                    where x is items_per_day
+                change the line value to the found line
+        display document chunk
+            if separator is __NONE__
+                display contents from current line to line + items_per_day
+            else
+                find the next x line(s) that contains a separator tag
+                    where x is items_per_day
+                display contents from current line to the line before the found line
+
+split it down to smaller, more manageable chunks
+*
+    done
+
+give it a rough estimate
+*
+    5h
+
+implementation with tests and code logic documentation
+    stuck with something strange or need to learn new technology, then read its DOCUMENTATION!
+        not videos, not blogs, spend time on the boring documentation
+    still stuck? process things step by step
+        divide the problem to the ultra small one
+        divide and solve each smallest problem entity, step by step you will reach your goal
+*
+    ongoing
+
+code review
+*
+    to be skipped
+
+ideally
+    small and frequent commits
+    created tests
+        not necessarily change-detector tests nor tests that are only for the coverage
+        tests should test behavior, not lines of code
+            the mindset should be is that "test the behavior", not just "test to be part of the coverage"
+        the idea is that even if the source code is totally refactored and algorithms are totally changed, the tests should be unaffected
+        treat it as if the module to be tested is a blackbox
+            you only know the
+                input (if there are any)
+                output (if there are any, if none then maybe it initiated internally some behavior such as a function call to something)
+            you should not necessarily know the algorithms inside
+            just test the expected output (or expected behavior)
+    updated documentations
+    there should be a link between task-tracking tools, reviews, commits, etc.
