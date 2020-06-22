@@ -5,7 +5,8 @@ import json
 import os
 import re
 
-from prepare_settings import NO_SEPARATOR
+# from prepare_settings import NO_SEPARATOR
+NO_SEPARATOR = '__NONE__'
 
 def _find_next_separator_tag(doc_file, current_line, items_per_day, separator):
     with open(doc_file) as doc_file_handler:
@@ -34,7 +35,13 @@ def _find_next_separator_tag(doc_file, current_line, items_per_day, separator):
             if items_covered == items_per_day:
                 return line_iterator + 1
 
-    return 1
+    return line_iterator + 1
+
+def _view_lines(doc_file, start_line, end_line):
+    with open(doc_file) as doc_file_handler:
+        doc_lines = doc_file_handler.readlines()
+        lines_to_display = doc_lines[start_line - 1 : end_line - 1]
+        print(lines_to_display)
 
 def view_document(doc_file, settings_file):
     with open(settings_file) as settings_file_handler:
@@ -56,6 +63,11 @@ def view_document(doc_file, settings_file):
         with open(settings_file, "w") as settings_file_handler:
             settings_file_handler.write(json.dumps(settings_dict))
 
+    end_line = _find_next_separator_tag(doc_file,
+                                        settings_dict['line'],
+                                        settings_dict['items_per_day'],
+                                        settings_dict['separator'])
+    _view_lines(doc_file, settings_dict['line'], end_line)
 
 base_dir = "files"
 doc_dir = os.path.join(base_dir, "pep8")
