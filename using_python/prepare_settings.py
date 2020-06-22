@@ -6,16 +6,20 @@ import os
 INIT_DATE = 'init'
 DEFAULT_ITEMS_PER_DAY = 1
 NO_SEPARATOR = '__NONE__'
+DEFAULT_MODE = "text"
 
 def prepare_settings(doc_dir, items_per_day=DEFAULT_ITEMS_PER_DAY, separator=NO_SEPARATOR):
     settings_file = os.path.join(doc_dir, "settings.txt")
 
     with open(settings_file, "w") as settings_file_handler:
+        # TODO
+        # Put this dict into its own class
         DEFAULT_VALUES = {
             "date" : INIT_DATE,
             "line" : 0,
             "items_per_day" : items_per_day,
-            "separator" : separator
+            "separator" : separator,
+            "mode" : DEFAULT_MODE # possible values # [text, html]
         }
         settings_file_handler.write(json.dumps(DEFAULT_VALUES))
 

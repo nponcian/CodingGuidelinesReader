@@ -6,6 +6,7 @@ import os
 import re
 
 # from prepare_settings import NO_SEPARATOR
+from html_to_text import html_content_to_text
 NO_SEPARATOR = '__NONE__'
 
 def _find_next_separator_tag(doc_file, current_line, items_per_day, separator):
@@ -22,6 +23,10 @@ def _find_next_separator_tag(doc_file, current_line, items_per_day, separator):
         for line in doc_lines[current_line:]:
             line_iterator += 1
 
+            line = line.strip()
+            if not line:
+                continue
+
             found_pattern = separator_re.search(line)
             if not found_pattern:
                 is_previous_line_a_separator = False
@@ -35,13 +40,15 @@ def _find_next_separator_tag(doc_file, current_line, items_per_day, separator):
             if items_covered == items_per_day:
                 return line_iterator + 1
 
-    return line_iterator + 1
+    return 1 if current_line == line_iterator + 1 else line_iterator + 1
 
-def _view_lines(doc_file, start_line, end_line):
+def _view_lines(doc_file, start_line, end_line, mode):
     with open(doc_file) as doc_file_handler:
         doc_lines = doc_file_handler.readlines()
         lines_to_display = doc_lines[start_line - 1 : end_line - 1]
-        print(lines_to_display)
+        if mode == "text":
+            lines_to_display_in_text = html_content_to_text("\n".join(lines_to_display))
+        print(lines_to_display_in_text)
 
 def view_document(doc_file, settings_file):
     with open(settings_file) as settings_file_handler:
@@ -67,7 +74,8 @@ def view_document(doc_file, settings_file):
                                         settings_dict['line'],
                                         settings_dict['items_per_day'],
                                         settings_dict['separator'])
-    _view_lines(doc_file, settings_dict['line'], end_line)
+
+    _view_lines(doc_file, settings_dict['line'], end_line, settings_dict['mode'])
 
 base_dir = "files"
 doc_dir = os.path.join(base_dir, "pep8")
