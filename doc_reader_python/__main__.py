@@ -22,6 +22,9 @@ def _view_help():
     print()
     print("    --view")
     print("        View document")
+    print()
+    print("    --next")
+    print("        Move to the next chunk of the document")
 
 def main(args=None):
     if args is None:
