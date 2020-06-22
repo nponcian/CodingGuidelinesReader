@@ -106,3 +106,13 @@ def view_document(doc_file, settings_file):
                                             settings_dict['items_per_day'],
                                             settings_dict['separator'])
     _view_lines(doc_file, settings_dict['line'], end_line, settings_dict['mode'])
+
+def set_next(settings_file):
+    with open(settings_file, "r+") as settings_file_handler:
+        settings_content = settings_file_handler.read()
+        settings_dict = json.loads(settings_content)
+
+        settings_dict['date'] = "set_next"
+        settings_file_handler.seek(0)
+        settings_file_handler.truncate()
+        settings_file_handler.write(json.dumps(settings_dict))

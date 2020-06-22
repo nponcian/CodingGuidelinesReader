@@ -3,7 +3,7 @@ import sys
 
 from .prepare_document import prepare_document
 from .prepare_settings import prepare_settings
-from .view_document import view_document
+from .view_document import set_next, view_document
 
 PROJECT_DIR = os.path.dirname(__file__)
 FILES_DIR = os.path.join(PROJECT_DIR, "files")
@@ -41,8 +41,13 @@ def main(args=None):
     elif args[0] == "--view":
         doc_dir = os.path.join(FILES_DIR, "pep8")
         doc_file = os.path.join(doc_dir, "doc.txt")
-        config_file = os.path.join(doc_dir, "settings.txt")
-        view_document(doc_file, config_file)
+        settings_file = os.path.join(doc_dir, "settings.txt")
+        view_document(doc_file, settings_file)
+
+    elif args[0] == "--next":
+        doc_dir = os.path.join(FILES_DIR, "pep8")
+        settings_file = os.path.join(doc_dir, "settings.txt")
+        set_next(settings_file)
 
     else:
         _view_help()
