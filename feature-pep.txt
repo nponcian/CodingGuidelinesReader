@@ -1,4 +1,5 @@
-June 21 2020 : 19:14
+June 21 2020 : 19:14 : Started planning the functionalities and design
+June 22 2020 : 11:50 : Basic functionality is working : approx. logged 6h
 
 know the overview purpose and benefits (nothing technically deep yet)
     ALWAYS start from the customer/user POV and then all the way deeper to the technicalities

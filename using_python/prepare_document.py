@@ -4,8 +4,7 @@ import os
 import requests
 
 def prepare_document():
-    # TODO
-    # Remove static values. These should be entered by the user.
+    # TODO : Remove static values. These should be entered by the user.
 
     document_url = "https://pep8.org/"
 
