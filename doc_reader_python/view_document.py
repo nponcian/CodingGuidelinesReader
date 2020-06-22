@@ -3,11 +3,8 @@ import json
 import os
 import re
 
-# TODO : Fix imports
-# from prepare_settings import INIT_LINE, NO_SEPARATOR
+from .prepare_settings import INIT_LINE, NO_SEPARATOR
 from .html_to_text import html_content_to_text
-INIT_LINE = 0
-NO_SEPARATOR = '__NONE__'
 
 def _find_next_separator_tag(doc_file, current_line, items_per_day, separator):
     with open(doc_file) as doc_file_handler:
