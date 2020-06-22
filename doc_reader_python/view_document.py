@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 from datetime import date
 import json
 import os
@@ -7,7 +5,7 @@ import re
 
 # TODO : Fix imports
 # from prepare_settings import INIT_LINE, NO_SEPARATOR
-from html_to_text import html_content_to_text
+from .html_to_text import html_content_to_text
 INIT_LINE = 0
 NO_SEPARATOR = '__NONE__'
 
@@ -108,9 +106,3 @@ def view_document(doc_file, settings_file):
                                             settings_dict['items_per_day'],
                                             settings_dict['separator'])
     _view_lines(doc_file, settings_dict['line'], end_line, settings_dict['mode'])
-
-base_dir = "files"
-doc_dir = os.path.join(base_dir, "pep8")
-doc_file = os.path.join(doc_dir, "doc.txt")
-config_file = os.path.join(doc_dir, "settings.txt")
-view_document(doc_file, config_file)

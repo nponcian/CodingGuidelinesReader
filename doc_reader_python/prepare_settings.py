@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 import json
 import os
 
@@ -23,8 +21,3 @@ def prepare_settings(doc_dir, items_per_day=DEFAULT_ITEMS_PER_DAY, separator=NO_
         }
         settings_file_handler.write(json.dumps(DEFAULT_VALUES))
 
-base_dir = "files"
-doc_dir = os.path.join(base_dir, "pep8")
-items_per_day = 1
-separator = '<h[0-9]'
-prepare_settings(doc_dir, items_per_day, separator)
